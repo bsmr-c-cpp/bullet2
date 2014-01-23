@@ -121,3 +121,4 @@ AppGyroscopicDemo
 AppInternalEdgeDemo
 AppMovingConcaveDemo
 AppMultiMaterialDemo
+docs/*.log
