@@ -21,3 +21,4 @@ ltmain.sh
 missing
 .libs/
 stamp-h1
+docs/*.log
