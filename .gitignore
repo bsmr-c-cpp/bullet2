@@ -122,3 +122,10 @@ AppInternalEdgeDemo
 AppMovingConcaveDemo
 AppMultiMaterialDemo
 docs/*.log
+docs/*.aux
+docs/*.out
+docs/*.toc
+docs/*.lol
+docs/*.idx
+docs/BulletQuickstart.pdf
+docs/bullet_logo_2010_9-eps-converted-to.pdf
