@@ -9,4 +9,5 @@ libbulletopenglsupport_a_SOURCES	= \
 	 DebugCastResult.h  GLDebugDrawer.cpp   \
 	GL_ShapeDrawer.h    GlutStuff.cpp       RenderTexture.h
 
-INCLUDES=-I../../src
+AM_CPPFLAGS=-I../../src
+
