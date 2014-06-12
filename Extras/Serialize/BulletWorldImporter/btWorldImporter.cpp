@@ -147,6 +147,10 @@ void btWorldImporter::deleteAllData()
 
 btCollisionShape* btWorldImporter::convertCollisionShape(  btCollisionShapeData* shapeData  )
 {
+	btCollisionShape** shapePtr =  m_shapeMap.find(shapeData);
+	if (shapePtr)
+		return *shapePtr;
+
 	btCollisionShape* shape = 0;
 
 	switch (shapeData->m_shapeType)
@@ -497,6 +501,9 @@ btCollisionShape* btWorldImporter::convertCollisionShape(  btCollisionShapeData*
 #endif
 			}
 		}
+	
+		//		printf("shapeMap.insert(%x,%x)\n",shapeData,shape);
+		m_shapeMap.insert(shapeData,shape);
 
 		return shape;
 	
@@ -1853,6 +1860,11 @@ void	btWorldImporter::convertRigidBodyFloat( btRigidBodyFloatData* colObjData)
 		angularFactor.deSerializeFloat(colObjData->m_angularFactor);
 		body->setLinearFactor(linearFactor);
 		body->setAngularFactor(angularFactor);
+		btVector3 linearVelocity, angularVelocity;
+		linearVelocity.deSerializeFloat(colObjData->m_linearVelocity);
+		angularVelocity.deSerializeFloat(colObjData->m_angularVelocity);
+		body->setLinearVelocity(linearVelocity);
+		body->setAngularVelocity(angularVelocity);
 
 #ifdef USE_INTERNAL_EDGE_UTILITY
 		if (shape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE)
@@ -1902,7 +1914,11 @@ void	btWorldImporter::convertRigidBodyDouble( btRigidBodyDoubleData* colObjData)
 		angularFactor.deSerializeDouble(colObjData->m_angularFactor);
 		body->setLinearFactor(linearFactor);
 		body->setAngularFactor(angularFactor);
-				
+		btVector3 linearVelocity, angularVelocity;
+		linearVelocity.deSerializeDouble(colObjData->m_linearVelocity);
+		angularVelocity.deSerializeDouble(colObjData->m_angularVelocity);
+		body->setLinearVelocity(linearVelocity);
+		body->setAngularVelocity(angularVelocity);
 
 #ifdef USE_INTERNAL_EDGE_UTILITY
 		if (shape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE)
